@@ -20,10 +20,7 @@ export default async function CourseworkPage({ params }: PageProps<"/[lang]/estu
         {dict.coursework.backHome}
       </a>
 
-      <p className="mt-8 font-display text-sm text-muted" aria-hidden="true">
-        §00
-      </p>
-      <h1 className="font-display text-3xl font-semibold text-foreground sm:text-4xl">{coursework.discipline}</h1>
+      <h1 className="mt-8 font-display text-3xl font-semibold text-foreground sm:text-4xl">{coursework.discipline}</h1>
       <p className="mt-4 max-w-[65ch] text-lg text-foreground">{coursework.intro}</p>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
@@ -46,11 +43,8 @@ export default async function CourseworkPage({ params }: PageProps<"/[lang]/estu
         ))}
       </ul>
 
-      {coursework.groups.map((group, i) => (
+      {coursework.groups.map((group) => (
         <section key={group.slug} aria-labelledby={`group-${group.slug}`} className="mt-16">
-          <p className="font-display text-sm text-muted" aria-hidden="true">
-            {`§0${i + 1}`}
-          </p>
           <h2 id={`group-${group.slug}`} className="font-display text-2xl font-semibold text-foreground">
             {group.title}
           </h2>
