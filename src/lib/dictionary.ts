@@ -73,6 +73,9 @@ const dictionary = {
         send_failed: "Não consegui enviar agora. Tenta de novo ou manda um e-mail direto.",
       },
     },
+    footer: {
+      sourceCode: "Código deste site",
+    },
   },
   en: {
     brand: "Gustavo Tozzo",
@@ -145,6 +148,9 @@ const dictionary = {
         not_configured: "The form isn't available right now — email me directly.",
         send_failed: "Couldn't send it right now. Try again or email me directly.",
       },
+    },
+    footer: {
+      sourceCode: "This site's source",
     },
   },
 } satisfies Record<Locale, unknown>;

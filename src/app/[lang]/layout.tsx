@@ -45,7 +45,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <SkipLink label={dict.skip} />
         <Header locale={locale} />
         <main id="main">{children}</main>
-        <Footer />
+        <Footer locale={locale} />
       </body>
     </html>
   );
