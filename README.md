@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfólio — Gustavo Tozzo Campos
 
-## Getting Started
+Site pessoal para apresentar minha transição de Analista SEO para desenvolvimento back-end: quem sou, o que já construí e como entrar em contato.
 
-First, run the development server:
+## O que tem aqui
+
+- **Sobre** — minha trajetória, da SEO técnica ao back-end
+- **Skills** — linguagens, back-end, front-end, dados e ferramentas, sempre com o contexto real de onde usei cada uma
+- **Projetos** — cada um com estudo de caso completo (contexto, decisões técnicas, desafios, o que eu faria diferente):
+  - [MedSafe Senior](https://github.com/GustavoTozzo/software-senior-backend) — app de adesão a medicamentos para idosos (Java/Spring Boot + Kotlin/Jetpack Compose)
+  - [Biblioteca Online](https://github.com/GustavoTozzo/biblioteca-online) — reescrita completa de um projeto acadêmico em Next.js, com aluguel e assinatura de livros
+  - [SEO Toolkit](https://github.com/GustavoTozzo/seo-toolkit) — ferramentas Python de SEO técnico que eu usava na Agência liveSEO, limpas e publicadas
+- **Experiência e Educação** — incluindo uma página dedicada aos [estudos de SQL e banco de dados](/estudos) da faculdade
+- **Contato** — formulário funcional (validação server-side, honeypot, limite de tentativas), além do e-mail direto
+
+Disponível em português (`/`) e inglês (`/en`).
+
+## Stack
+
+Next.js (App Router) · TypeScript · Tailwind CSS · Zod · Resend
+
+## Rodando localmente
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env   # preencha RESEND_API_KEY e CONTACT_TO_EMAIL para testar o formulário de contato
 pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
