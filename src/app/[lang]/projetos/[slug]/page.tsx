@@ -1,8 +1,15 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArrowLeft } from "lucide-react";
 import { localeSchema, type Locale } from "@/content/schema";
 import { getContent } from "@/lib/get-content";
 import { getDictionary } from "@/lib/dictionary";
+import { SITE_URL } from "@/lib/site-config";
+
+const breadcrumbLabels = {
+  pt: { home: "Início", projects: "Projetos" },
+  en: { home: "Home", projects: "Projects" },
+} as const;
 
 function projectsWithCaseStudy(locale: Locale) {
   return getContent(locale).projects.filter((p) => p.caseStudy);
@@ -11,6 +18,42 @@ function projectsWithCaseStudy(locale: Locale) {
 export async function generateStaticParams() {
   const locales: Locale[] = ["pt", "en"];
   return locales.flatMap((lang) => projectsWithCaseStudy(lang).map((p) => ({ lang, slug: p.slug })));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[lang]/projetos/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  const parsed = localeSchema.safeParse(lang);
+  const locale = parsed.success ? parsed.data : "pt";
+  const project = getContent(locale).projects.find((p) => p.slug === slug);
+  if (!project) return {};
+  const path = locale === "pt" ? `/projetos/${slug}` : `/en/projetos/${slug}`;
+
+  return {
+    title: project.title,
+    description: project.problem,
+    alternates: {
+      canonical: path,
+      languages: {
+        pt: `/projetos/${slug}`,
+        en: `/en/projetos/${slug}`,
+        "x-default": `/projetos/${slug}`,
+      },
+    },
+    openGraph: {
+      title: project.title,
+      description: project.problem,
+      url: path,
+      images: [`${path}/opengraph-image`],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.problem,
+      images: [`${path}/opengraph-image`],
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps<"/[lang]/projetos/[slug]">) {
@@ -23,9 +66,24 @@ export default async function ProjectDetailPage({ params }: PageProps<"/[lang]/p
   if (!project || !project.caseStudy) notFound();
   const { caseStudy } = project;
   const home = locale === "pt" ? "/" : "/en";
+  const labels = breadcrumbLabels[locale];
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: labels.home, item: `${SITE_URL}${home}` },
+      { "@type": "ListItem", position: 2, name: labels.projects, item: `${SITE_URL}${home}#projetos` },
+      { "@type": "ListItem", position: 3, name: project.title },
+    ],
+  };
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <a href={`${home}#projetos`} className="inline-flex items-center gap-1 text-sm text-muted hover:text-foreground">
         <ArrowLeft size={14} aria-hidden="true" />
         {dict.projectDetail.backHome}

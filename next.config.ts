@@ -60,6 +60,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/", destination: "/pt" },
       { source: "/projetos/:slug", destination: "/pt/projetos/:slug" },
+      { source: "/projetos/:slug/opengraph-image", destination: "/pt/projetos/:slug/opengraph-image" },
       { source: "/estudos", destination: "/pt/estudos" },
     ];
   },

@@ -1,8 +1,38 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { localeSchema } from "@/content/schema";
 import { getCoursework } from "@/lib/get-coursework";
 import { getDictionary } from "@/lib/dictionary";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/estudos">): Promise<Metadata> {
+  const { lang } = await params;
+  const parsed = localeSchema.safeParse(lang);
+  const locale = parsed.success ? parsed.data : "pt";
+  const coursework = getCoursework(locale);
+  const path = locale === "pt" ? "/estudos" : "/en/estudos";
+
+  return {
+    title: coursework.discipline,
+    description: coursework.intro,
+    alternates: {
+      canonical: path,
+      languages: { pt: "/estudos", en: "/en/estudos", "x-default": "/estudos" },
+    },
+    openGraph: {
+      title: coursework.discipline,
+      description: coursework.intro,
+      url: path,
+      images: ["/opengraph-image"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: coursework.discipline,
+      description: coursework.intro,
+      images: ["/opengraph-image"],
+    },
+  };
+}
 
 export default async function CourseworkPage({ params }: PageProps<"/[lang]/estudos">) {
   const { lang } = await params;
