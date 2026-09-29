@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f8fa;
+  --panel: #eef1f5;
+  --foreground: #141a22;
+  --accent: #2b6cb0;
+  --accent-2: #bd8b13;
+  --muted: #5b6472;
+  --border: #d8dce3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #10151d;
+    --panel: #151b25;
+    --foreground: #e7eaee;
+    --accent: #6aa6e8;
+    --accent-2: #e0a83d;
+    --muted: #8891a0;
+    --border: #232b36;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #10151d;
+  --panel: #151b25;
+  --foreground: #e7eaee;
+  --accent: #6aa6e8;
+  --accent-2: #e0a83d;
+  --muted: #8891a0;
+  --border: #232b36;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-panel: var(--panel);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-plex-sans);
+  --font-display: var(--font-space-grotesk);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
